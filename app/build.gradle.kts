@@ -38,7 +38,14 @@ android {
     }
 }
 
+hilt {
+    enableAggregatingTask = false
+}
+
 kotlin {
+    compilerOptions{
+        freeCompilerArgs = listOf("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
+    }
     jvmToolchain(21)
 }
 

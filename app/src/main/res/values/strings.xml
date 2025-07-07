@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">My Dive Log</string>
+    <string name="bottom_navigation_home">Home</string>
+    <string name="bottom_navigation_certificates">Certificates</string>
+    <string name="bottom_navigation_my_dives">My Dives</string>
+    <string name="bottom_navigation_buddies">Buddies</string>
+    <string name="bottom_navigation_statistics">Statistics</string>
 </resources>
