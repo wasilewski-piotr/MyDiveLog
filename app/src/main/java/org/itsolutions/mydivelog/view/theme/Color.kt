@@ -47,9 +47,9 @@ val diveLog_theme_light_scrim = Color(0xFF000000)
 val diveLog_theme_light_surfaceBright = Color(0xFFFDFBFF)
 val diveLog_theme_light_surfaceContainer = diveLog_theme_light_background
 val diveLog_theme_light_surfaceContainerHigh = Color(0xFFEADDFF)
-val diveLog_theme_light_surfaceContainerHighest = Color(0xFFD0BCFF)
-val diveLog_theme_light_surfaceContainerLow = Color(0xFFF9F7FC)
-val diveLog_theme_light_surfaceContainerLowest = Color(0xFFFBF9FD)
+val diveLog_theme_light_surfaceContainerHighest = Color(0xFFBBDEFB)
+val diveLog_theme_light_surfaceContainerLow = diveLog_theme_light_secondaryContainer
+val diveLog_theme_light_surfaceContainerLowest = Color(0xFFC8E6C9)
 val diveLog_theme_light_surfaceDim = Color(0xFF6B6877)
 
 val diveLog_theme_dark_primary = Color(0xFFD0BCFF)

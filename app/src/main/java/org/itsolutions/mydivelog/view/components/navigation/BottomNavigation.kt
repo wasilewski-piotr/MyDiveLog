@@ -1,10 +1,15 @@
 package org.itsolutions.mydivelog.view.components.navigation
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -14,8 +19,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -26,6 +33,8 @@ import org.itsolutions.mydivelog.presentation.certificates.CertificatesViewModel
 import org.itsolutions.mydivelog.presentation.home.HomeViewModel
 import org.itsolutions.mydivelog.presentation.myDives.MyDivesViewModel
 import org.itsolutions.mydivelog.presentation.statistics.StatisticsViewModel
+import org.itsolutions.mydivelog.utils.AppSpacing
+import org.itsolutions.mydivelog.utils.modifier.windowHorizontalPadding
 import org.itsolutions.mydivelog.view.screens.buddies.BuddiesScreen
 import org.itsolutions.mydivelog.view.screens.certificates.CertificatesScreen
 import org.itsolutions.mydivelog.view.screens.home.HomeScreen
@@ -36,9 +45,10 @@ import org.itsolutions.mydivelog.view.screens.statistics.StatisticsScreen
 private fun BottomNavigationNavigationHost(
     navController: NavHostController,
     startDestination: BottomBarNavigationElement,
+    onNavigateToScreen: (BottomBarNavigationElement) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    NavHost(navController, startDestination.route) {
+    NavHost(navController, startDestination.route, modifier) {
         BottomBarNavigationElement.entries.forEach { destination ->
             composable(destination.route) {
                 when (destination) {
@@ -52,7 +62,9 @@ private fun BottomNavigationNavigationHost(
                     }
                     BottomBarNavigationElement.MyDives -> {
                         val viewModel: MyDivesViewModel = hiltViewModel()
-                        MyDivesScreen(viewModel)
+                        MyDivesScreen(viewModel) {
+                            onNavigateToScreen(BottomBarNavigationElement.Statistics)
+                        }
                     }
                     BottomBarNavigationElement.Buddies -> {
                         val viewModel: BuddiesViewModel = hiltViewModel()
@@ -68,9 +80,8 @@ private fun BottomNavigationNavigationHost(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BottomNavigationBar(modifier: Modifier = Modifier) {
+fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val startDestination = BottomBarNavigationElement.Home
     var selectedDestination by rememberSaveable { mutableStateOf(startDestination) }
@@ -78,22 +89,32 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
     Scaffold(
         modifier = modifier,
         bottomBar = {
-            NavigationBar(windowInsets = NavigationBarDefaults.windowInsets) {
-                BottomBarNavigationElement.entries.forEachIndexed { index, destination ->
-                    NavigationBarItem(
-                        selected = selectedDestination.ordinal == index,
-                        onClick = {
-                            navController.navigate(route = destination.route)
-                            selectedDestination = destination
-                        },
-                        icon = {
-                            Icon(
-                                painter = painterResource(destination.icon),
-                                contentDescription = null
+            Column(modifier = Modifier.fillMaxWidth()) {
+                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                NavigationBar {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = AppSpacing.md),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        BottomBarNavigationElement.entries.forEachIndexed { index, destination ->
+                            NavigationBarItem(
+                                selected = selectedDestination.ordinal == index,
+                                onClick = {
+                                    navController.navigate(route = destination.route)
+                                    selectedDestination = destination
+                                },
+                                icon = {
+                                    Icon(
+                                        painter = painterResource(destination.icon),
+                                        contentDescription = null
+                                    )
+                                },
+                                label = { Text(stringResource(destination.label)) }
                             )
-                        },
-                        label = { Text(stringResource(destination.label)) }
-                    )
+                        }
+                    }
                 }
             }
         }
@@ -101,8 +122,14 @@ fun BottomNavigationBar(modifier: Modifier = Modifier) {
         BottomNavigationNavigationHost(
             navController = navController,
             startDestination = startDestination,
-            modifier = Modifier.padding(contentPadding)
+            onNavigateToScreen = {
+                selectedDestination = it
+                navController.navigate(it.route)
+            },
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .windowHorizontalPadding()
         )
     }
-
 }

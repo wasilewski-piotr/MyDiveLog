@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
 import org.itsolutions.mydivelog.utils.activity.setDiveLogTheme
-import org.itsolutions.mydivelog.view.components.navigation.BottomNavigationBar
+import org.itsolutions.mydivelog.view.components.navigation.DiveLogBottomNavigation
 
 @HiltAndroidApp
 class MyDiveLogApplication : Application()
@@ -19,7 +19,7 @@ class MyDiveLogActivity : ComponentActivity() {
         enableEdgeToEdge()
         window.isNavigationBarContrastEnforced = false
         setDiveLogTheme {
-            BottomNavigationBar()
+            DiveLogBottomNavigation()
         }
     }
 }

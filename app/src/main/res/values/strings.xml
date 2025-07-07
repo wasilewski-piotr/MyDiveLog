@@ -5,4 +5,15 @@
     <string name="bottom_navigation_my_dives">My Dives</string>
     <string name="bottom_navigation_buddies">Buddies</string>
     <string name="bottom_navigation_statistics">Statistics</string>
+    <string name="full_dive_report">Full Dive Report</string>
+    <string name="new_dive">New Dive</string>
+    <string name="new_buddy">Create new dive buddy profile</string>
+    <string name="my_dives_title">Recent activities</string>
+    <string name="my_dives_subtitle">Your most recent dive trips.</string>
+    <string name="statistics_title">Dive Report</string>
+    <string name="statistics_subtitle">Full insights to all of your logged dives.</string>
+    <string name="buddies_title">Buddies</string>
+    <string name="buddies_subtitle">Profiles of your diving friends</string>
+    <string name="certificates_title">Your certificates</string>
+    <string name="certificates_subtitle">Easy access to all of your diving licences and permissions</string>
 </resources>
