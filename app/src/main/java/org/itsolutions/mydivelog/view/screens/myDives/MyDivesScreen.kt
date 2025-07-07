@@ -9,7 +9,6 @@ import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.presentation.myDives.MyDivesViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.view.components.AddElementCard
-import org.itsolutions.mydivelog.view.components.DiveLogTitle
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
 import org.itsolutions.mydivelog.view.components.StatisticsCard
 import org.itsolutions.mydivelog.view.components.semantics.HorizontalSpacer
@@ -29,7 +28,7 @@ fun MyDivesScreen(
                 text = R.string.new_dive,
                 containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 modifier = Modifier.weight(1f)
-            ) {  }
+            ) { }
             HorizontalSpacer(AppSpacing.sm)
             StatisticsCard(
                 modifier = Modifier.weight(1f),

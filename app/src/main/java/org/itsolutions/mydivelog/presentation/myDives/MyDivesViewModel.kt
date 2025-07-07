@@ -7,6 +7,4 @@ import javax.inject.Inject
 @HiltViewModel
 class MyDivesViewModel @Inject constructor(
 
-): ViewModel() {
-
-}
+) : ViewModel()

@@ -19,7 +19,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -56,20 +55,24 @@ private fun BottomNavigationNavigationHost(
                         val viewModel: HomeViewModel = hiltViewModel()
                         HomeScreen(viewModel)
                     }
+
                     BottomBarNavigationElement.Certificates -> {
                         val viewModel: CertificatesViewModel = hiltViewModel()
                         CertificatesScreen(viewModel)
                     }
+
                     BottomBarNavigationElement.MyDives -> {
                         val viewModel: MyDivesViewModel = hiltViewModel()
                         MyDivesScreen(viewModel) {
                             onNavigateToScreen(BottomBarNavigationElement.Statistics)
                         }
                     }
+
                     BottomBarNavigationElement.Buddies -> {
                         val viewModel: BuddiesViewModel = hiltViewModel()
                         BuddiesScreen(viewModel)
                     }
+
                     BottomBarNavigationElement.Statistics -> {
                         val viewModel: StatisticsViewModel = hiltViewModel()
                         StatisticsScreen(viewModel)
@@ -90,7 +93,10 @@ fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
         modifier = modifier,
         bottomBar = {
             Column(modifier = Modifier.fillMaxWidth()) {
-                HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                HorizontalDivider(
+                    thickness = 1.dp,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
                 NavigationBar {
                     Row(
                         modifier = Modifier

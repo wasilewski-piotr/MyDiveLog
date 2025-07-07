@@ -7,6 +7,4 @@ import javax.inject.Inject
 @HiltViewModel
 class StatisticsViewModel @Inject constructor(
 
-): ViewModel() {
-
-}
+) : ViewModel()

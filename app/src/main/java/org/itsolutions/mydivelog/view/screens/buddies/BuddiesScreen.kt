@@ -21,6 +21,6 @@ fun BuddiesScreen(
         AddElementCard(
             text = R.string.new_buddy,
             modifier = Modifier.fillMaxWidth()
-        ) {  }
+        ) { }
     }
 }

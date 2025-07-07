@@ -7,6 +7,4 @@ import javax.inject.Inject
 @HiltViewModel
 class CertificatesViewModel @Inject constructor(
 
-): ViewModel() {
-
-}
+) : ViewModel()
