@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.presentation.certificates
+package org.itsolutions.mydivelog.presentation.menu.certificates
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -14,31 +14,29 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import org.itsolutions.mydivelog.presentation.buddies.BuddiesViewModel
-import org.itsolutions.mydivelog.presentation.certificates.CertificatesViewModel
-import org.itsolutions.mydivelog.presentation.home.HomeViewModel
-import org.itsolutions.mydivelog.presentation.myDives.MyDivesViewModel
-import org.itsolutions.mydivelog.presentation.statistics.StatisticsViewModel
+import org.itsolutions.mydivelog.presentation.menu.buddies.BuddiesViewModel
+import org.itsolutions.mydivelog.presentation.menu.certificates.CertificatesViewModel
+import org.itsolutions.mydivelog.presentation.menu.home.HomeViewModel
+import org.itsolutions.mydivelog.presentation.menu.myDives.MyDivesViewModel
+import org.itsolutions.mydivelog.presentation.menu.statistics.StatisticsViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.utils.modifier.windowHorizontalPadding
-import org.itsolutions.mydivelog.view.screens.buddies.BuddiesScreen
-import org.itsolutions.mydivelog.view.screens.certificates.CertificatesScreen
-import org.itsolutions.mydivelog.view.screens.home.HomeScreen
-import org.itsolutions.mydivelog.view.screens.myDives.MyDivesScreen
-import org.itsolutions.mydivelog.view.screens.statistics.StatisticsScreen
+import org.itsolutions.mydivelog.view.screens.menu.buddies.BuddiesScreen
+import org.itsolutions.mydivelog.view.screens.menu.certificates.CertificatesScreen
+import org.itsolutions.mydivelog.view.screens.menu.home.HomeScreen
+import org.itsolutions.mydivelog.view.screens.menu.myDives.MyDivesScreen
+import org.itsolutions.mydivelog.view.screens.menu.statistics.StatisticsScreen
 
 @Composable
 private fun BottomNavigationNavigationHost(
@@ -87,7 +85,8 @@ private fun BottomNavigationNavigationHost(
 fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val startDestination = BottomBarNavigationElement.Home
-    var selectedDestination by rememberSaveable { mutableStateOf(startDestination) }
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
+    val currentRoute = currentDestination?.hierarchy?.firstOrNull()?.route
 
     Scaffold(
         modifier = modifier,
@@ -101,23 +100,20 @@ fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(horizontal = AppSpacing.md),
+                            .padding(horizontal = AppSpacing.sm),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        BottomBarNavigationElement.entries.forEachIndexed { index, destination ->
+                        BottomBarNavigationElement.entries.forEach {
                             NavigationBarItem(
-                                selected = selectedDestination.ordinal == index,
-                                onClick = {
-                                    navController.navigate(route = destination.route)
-                                    selectedDestination = destination
-                                },
+                                selected = currentRoute == it.route,
+                                onClick = { navController.navigateBackToHomepage(it) },
                                 icon = {
                                     Icon(
-                                        painter = painterResource(destination.icon),
+                                        painter = painterResource(it.icon),
                                         contentDescription = null
                                     )
                                 },
-                                label = { Text(stringResource(destination.label)) }
+                                label = { Text(stringResource(it.label)) }
                             )
                         }
                     }
@@ -128,14 +124,20 @@ fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
         BottomNavigationNavigationHost(
             navController = navController,
             startDestination = startDestination,
-            onNavigateToScreen = {
-                selectedDestination = it
-                navController.navigate(it.route)
-            },
+            onNavigateToScreen = { navController.navigateBackToHomepage(it) },
             modifier = Modifier
                 .fillMaxSize()
                 .padding(contentPadding)
                 .windowHorizontalPadding()
         )
+    }
+}
+
+private fun NavHostController.navigateBackToHomepage(route: BottomBarNavigationElement) {
+    navigate(route.route) {
+        popUpTo(graph.startDestinationId) {
+            inclusive = false
+        }
+        launchSingleTop = true
     }
 }

@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.view.screens.myDives
+package org.itsolutions.mydivelog.view.screens.menu.myDives
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -6,7 +6,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import org.itsolutions.mydivelog.R
-import org.itsolutions.mydivelog.presentation.myDives.MyDivesViewModel
+import org.itsolutions.mydivelog.presentation.menu.myDives.MyDivesViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.view.components.AddElementCard
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle

@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.view.screens.certificates
+package org.itsolutions.mydivelog.view.screens.menu.certificates
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,11 +10,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import org.itsolutions.mydivelog.R
-import org.itsolutions.mydivelog.presentation.certificates.CertificatesViewModel
+import org.itsolutions.mydivelog.presentation.menu.certificates.CertificatesViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
+import org.itsolutions.mydivelog.utils.activity.activityLauncherWithResult
 import org.itsolutions.mydivelog.utils.modifier.windowBottomPadding
 import org.itsolutions.mydivelog.view.components.AddElementCard
 import org.itsolutions.mydivelog.view.components.DiveLogCard
@@ -23,17 +25,24 @@ import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
 import org.itsolutions.mydivelog.view.components.InfoCard
 import org.itsolutions.mydivelog.view.components.semantics.HorizontalSpacer
 import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
+import org.itsolutions.mydivelog.view.screens.certificates.AllCertificatesListActivity
 
 @Composable
 fun CertificatesScreen(
     viewModel: CertificatesViewModel
 ) {
+    val context = LocalContext.current
     val verticalScrollState = rememberScrollState()
     val organizations = viewModel.organizations.collectAsState()
+    val launcher = activityLauncherWithResult {
 
-    Column(modifier = Modifier
-        .verticalScroll(verticalScrollState)
-        .windowBottomPadding()) {
+    }
+
+    Column(
+        modifier = Modifier
+            .verticalScroll(verticalScrollState)
+            .windowBottomPadding()
+    ) {
         DiveLogTitleWithSubtitle(
             title = R.string.certificates_title,
             subtitle = R.string.certificates_subtitle
@@ -51,7 +60,7 @@ fun CertificatesScreen(
                 text = R.string.see_all_certificates,
                 containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
                 modifier = Modifier.weight(1f),
-                onClick = { }
+                onClick = { launcher(AllCertificatesListActivity.createInstance(context)) }
             ) { tint, modifier ->
                 Icon(
                     painter = painterResource(R.drawable.quick_reference_all),

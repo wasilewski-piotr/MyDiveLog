@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.presentation.buddies
+package org.itsolutions.mydivelog.presentation.menu.buddies
 
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

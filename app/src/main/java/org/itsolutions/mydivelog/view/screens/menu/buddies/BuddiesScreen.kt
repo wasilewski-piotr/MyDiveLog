@@ -1,11 +1,11 @@
-package org.itsolutions.mydivelog.view.screens.buddies
+package org.itsolutions.mydivelog.view.screens.menu.buddies
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import org.itsolutions.mydivelog.R
-import org.itsolutions.mydivelog.presentation.buddies.BuddiesViewModel
+import org.itsolutions.mydivelog.presentation.menu.buddies.BuddiesViewModel
 import org.itsolutions.mydivelog.view.components.AddElementCard
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
 
