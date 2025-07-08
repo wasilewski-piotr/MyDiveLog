@@ -67,7 +67,7 @@ fun StatisticsCard(
 }
 
 @Composable
-private fun DiveLogCard(
+fun DiveLogCard(
     @StringRes text: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,

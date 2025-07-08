@@ -8,12 +8,18 @@
     <string name="full_dive_report">Full Dive Report</string>
     <string name="new_dive">New Dive</string>
     <string name="new_buddy">Create new dive buddy profile</string>
+    <string name="new_certificate">New certificate</string>
+    <string name="see_all_certificates">Certificates held</string>
     <string name="my_dives_title">Recent activities</string>
     <string name="my_dives_subtitle">Your most recent dive trips.</string>
     <string name="statistics_title">Dive Report</string>
     <string name="statistics_subtitle">Full insights to all of your logged dives.</string>
     <string name="buddies_title">Buddies</string>
-    <string name="buddies_subtitle">Profiles of your diving friends</string>
+    <string name="buddies_subtitle">Profiles of your diving friends.</string>
     <string name="certificates_title">Your certificates</string>
-    <string name="certificates_subtitle">Easy access to all of your diving licences and permissions</string>
+    <string name="certificates_subtitle">Easy access to all of your diving licences and permissions.</string>
+    <string name="my_organizations">Diving organizations that you are part of based on owned certificates</string>
+    <string name="SSI">Scuba Schools International</string>
+    <string name="PADI">Professional Association of Diving Instructors</string>
+    <string name="GUE">Global Underwater Explorers</string>
 </resources>

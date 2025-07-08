@@ -5,3 +5,5 @@ import androidx.compose.ui.Modifier
 import org.itsolutions.mydivelog.utils.AppSpacing
 
 fun Modifier.windowHorizontalPadding() = this.padding(horizontal = AppSpacing.md)
+
+fun Modifier.windowBottomPadding() = this.padding(bottom = AppSpacing.md)

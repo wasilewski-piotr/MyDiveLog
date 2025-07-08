@@ -37,7 +37,6 @@ fun DiveLogTitle(@StringRes title: Int) {
 fun DiveLogSubtitle(@StringRes subtitle: Int) {
     Text(
         text = stringResource(subtitle),
-        style = MaterialTheme.typography.bodyMedium,
         modifier = Modifier.padding(vertical = AppSpacing.sm)
     )
 }
