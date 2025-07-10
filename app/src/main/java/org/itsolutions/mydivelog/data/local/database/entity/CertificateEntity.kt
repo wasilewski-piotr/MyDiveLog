@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import org.itsolutions.mydivelog.domain.model.DiveOrganization
 import java.time.LocalDate
 
-@Entity(tableName = "certificates")
+@Entity(tableName = "certifications")
 data class CertificateEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val certificateName: String,

@@ -26,14 +26,14 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import org.itsolutions.mydivelog.presentation.menu.buddies.BuddiesViewModel
-import org.itsolutions.mydivelog.presentation.menu.certificates.CertificatesViewModel
+import org.itsolutions.mydivelog.presentation.menu.certifications.CertificationsViewModel
 import org.itsolutions.mydivelog.presentation.menu.home.HomeViewModel
 import org.itsolutions.mydivelog.presentation.menu.myDives.MyDivesViewModel
 import org.itsolutions.mydivelog.presentation.menu.statistics.StatisticsViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.utils.modifier.windowHorizontalPadding
 import org.itsolutions.mydivelog.view.screens.menu.buddies.BuddiesScreen
-import org.itsolutions.mydivelog.view.screens.menu.certificates.CertificatesScreen
+import org.itsolutions.mydivelog.view.screens.menu.certifications.CertificationsScreen
 import org.itsolutions.mydivelog.view.screens.menu.home.HomeScreen
 import org.itsolutions.mydivelog.view.screens.menu.myDives.MyDivesScreen
 import org.itsolutions.mydivelog.view.screens.menu.statistics.StatisticsScreen
@@ -54,9 +54,9 @@ private fun BottomNavigationNavigationHost(
                         HomeScreen(viewModel)
                     }
 
-                    BottomBarNavigationElement.Certificates -> {
-                        val viewModel: CertificatesViewModel = hiltViewModel()
-                        CertificatesScreen(viewModel)
+                    BottomBarNavigationElement.Certifications -> {
+                        val viewModel: CertificationsViewModel = hiltViewModel()
+                        CertificationsScreen(viewModel)
                     }
 
                     BottomBarNavigationElement.MyDives -> {

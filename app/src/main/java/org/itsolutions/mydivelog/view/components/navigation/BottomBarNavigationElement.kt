@@ -14,9 +14,9 @@ enum class BottomBarNavigationElement(
         label = R.string.bottom_navigation_home,
         icon = R.drawable.home
     ),
-    Certificates(
-        route = "certificates",
-        label = R.string.bottom_navigation_certificates,
+    Certifications(
+        route = "certifications",
+        label = R.string.bottom_navigation_certifications,
         icon = R.drawable.badge
     ),
     MyDives(

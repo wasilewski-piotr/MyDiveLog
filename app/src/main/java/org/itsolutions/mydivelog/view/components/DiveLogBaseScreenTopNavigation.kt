@@ -1,9 +1,8 @@
-package org.itsolutions.mydivelog.view.screens.certificates
+package org.itsolutions.mydivelog.view.components
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -15,33 +14,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.hilt.navigation.compose.hiltViewModel
-import org.itsolutions.mydivelog.R
-import org.itsolutions.mydivelog.presentation.certificates.AllCertificatesViewModel
-import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.utils.modifier.windowHorizontalPadding
-import org.itsolutions.mydivelog.view.components.DiveLogCertificationCard
-import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
-import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AllCertificatesListScreen(
-    onBackPressed: () -> Unit,
+fun DiveLogBaseScreenTopNavigation(
+    screenTitle: String,
+    onBack: () -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
-    val scrollState = rememberScrollState()
-    val viewModel: AllCertificatesViewModel = hiltViewModel()
-    val certificates = viewModel.certifications.collectAsState()
-
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.bottom_navigation_certificates),
+                        text = screenTitle,
                         style = MaterialTheme.typography.bodyLarge
                     )
                 },
@@ -56,7 +44,7 @@ fun AllCertificatesListScreen(
                                 contentDescription = null
                             )
                         },
-                        onClick = onBackPressed
+                        onClick = onBack
                     )
                 }
             )
@@ -65,18 +53,8 @@ fun AllCertificatesListScreen(
         Column(
             modifier = Modifier
                 .padding(contentPadding)
-                .windowHorizontalPadding()
-                .verticalScroll(scrollState)
-        ) {
-            DiveLogTitleWithSubtitle(
-                title = R.string.certificates_held_title,
-                subtitle = R.string.certificates_held_subtitle
-            )
-            VerticalSpacer(AppSpacing.sm)
-            certificates.value.forEach {
-                DiveLogCertificationCard(it)
-                VerticalSpacer(AppSpacing.sm)
-            }
-        }
+                .windowHorizontalPadding(),
+            content = content
+        )
     }
 }

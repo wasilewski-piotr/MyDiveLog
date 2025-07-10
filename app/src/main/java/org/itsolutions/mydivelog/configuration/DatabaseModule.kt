@@ -28,6 +28,7 @@ object DatabaseModule {
             )
             .addTypeConverter(DateTimeConverter())
             .addTypeConverter(DiveOrganizationConverter())
+            .fallbackToDestructiveMigration(true)
             .build()
     }
 

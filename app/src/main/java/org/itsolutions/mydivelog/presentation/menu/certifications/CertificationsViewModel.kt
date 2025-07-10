@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.presentation.menu.certificates
+package org.itsolutions.mydivelog.presentation.menu.certifications
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,7 @@ import org.itsolutions.mydivelog.domain.repository.CertificateRepository
 import javax.inject.Inject
 
 @HiltViewModel
-class CertificatesViewModel @Inject constructor(
+class CertificationsViewModel @Inject constructor(
     private val certificateRepository: CertificateRepository
 ) : ViewModel() {
 

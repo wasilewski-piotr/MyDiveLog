@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.screens.certificates.AllCertificatesListActivity"/>
+        <activity android:name=".view.screens.certifications.allCertifications.AllCertificationsListActivity"/>
+        <activity android:name=".view.screens.certifications.newCertification.NewCertificationActivity"/>
     </application>
 
 </manifest>

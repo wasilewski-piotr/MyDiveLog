@@ -2,6 +2,7 @@ package org.itsolutions.mydivelog.view.screens.menu.statistics
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.stringResource
 import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.presentation.menu.statistics.StatisticsViewModel
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
@@ -12,8 +13,8 @@ fun StatisticsScreen(
 ) {
     Column {
         DiveLogTitleWithSubtitle(
-            title = R.string.statistics_title,
-            subtitle = R.string.statistics_subtitle
+            title = stringResource(R.string.statistics_title),
+            subtitle = stringResource(R.string.statistics_subtitle)
         )
     }
 }

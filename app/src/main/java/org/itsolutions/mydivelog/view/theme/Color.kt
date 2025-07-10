@@ -15,7 +15,7 @@ val diveLog_theme_light_gray_800 = Color(0xFF646D74)
 val diveLog_theme_light_gray_900 = Color(0xFF3B3F44)
 
 
-val diveLog_theme_light_primary = Color(0xFF6750A4)
+val diveLog_theme_light_primary = Color(0xFF49454F)
 val diveLog_theme_light_onPrimary = Color.White
 val diveLog_theme_light_primaryContainer = Color(0xFFEADDFF)
 val diveLog_theme_light_onPrimaryContainer = Color(0xFF21005D)
@@ -33,7 +33,7 @@ val diveLog_theme_light_onBackground = Color(0xFF1C1B1F)
 val diveLog_theme_light_surface = Color(0xFFFFFBFE)
 val diveLog_theme_light_onSurface = Color(0xFF1C1B1F)
 val diveLog_theme_light_surfaceVariant = Color(0xFFE7E0EC)
-val diveLog_theme_light_onSurfaceVariant = Color(0xFF49454F)
+val diveLog_theme_light_onSurfaceVariant = diveLog_theme_light_primary
 val diveLog_theme_light_surfaceTint = diveLog_theme_light_primary
 val diveLog_theme_light_inverseSurface = Color(0xFF313033)
 val diveLog_theme_light_inverseOnSurface = Color(0xFFF4EFF4)

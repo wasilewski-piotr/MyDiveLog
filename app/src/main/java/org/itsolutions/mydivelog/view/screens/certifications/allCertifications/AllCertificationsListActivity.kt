@@ -1,4 +1,4 @@
-package org.itsolutions.mydivelog.view.screens.certificates
+package org.itsolutions.mydivelog.view.screens.certifications.allCertifications
 
 import android.content.Context
 import android.content.Intent
@@ -8,19 +8,20 @@ import org.itsolutions.mydivelog.utils.activity.setDiveLogTheme
 import org.itsolutions.mydivelog.view.screens.MyDiveLogComponentActivity
 
 @AndroidEntryPoint
-class AllCertificatesListActivity : MyDiveLogComponentActivity() {
+class AllCertificationsListActivity : MyDiveLogComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setDiveLogTheme {
-            AllCertificatesListScreen(
-                onBackPressed = ::finish
+            AllCertificationsListScreen(
+                onBack = ::finish,
+                reload = { setResult(RESULT_OK) }
             )
         }
     }
 
     companion object {
         fun createInstance(context: Context) =
-            Intent(context, AllCertificatesListActivity::class.java)
+            Intent(context, AllCertificationsListActivity::class.java)
     }
 }

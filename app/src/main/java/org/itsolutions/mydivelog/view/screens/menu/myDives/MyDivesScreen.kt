@@ -5,12 +5,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.presentation.menu.myDives.MyDivesViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
-import org.itsolutions.mydivelog.view.components.AddElementCard
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
-import org.itsolutions.mydivelog.view.components.StatisticsCard
+import org.itsolutions.mydivelog.view.components.cards.DiveLogNewElementCard
+import org.itsolutions.mydivelog.view.components.cards.DiveLogStatisticsCard
 import org.itsolutions.mydivelog.view.components.semantics.HorizontalSpacer
 
 @Composable
@@ -20,17 +21,17 @@ fun MyDivesScreen(
 ) {
     Column {
         DiveLogTitleWithSubtitle(
-            title = R.string.my_dives_title,
-            subtitle = R.string.my_dives_subtitle
+            title = stringResource(R.string.my_dives_title),
+            subtitle = stringResource(R.string.my_dives_subtitle)
         )
         Row {
-            AddElementCard(
+            DiveLogNewElementCard(
                 text = R.string.new_dive,
                 containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 modifier = Modifier.weight(1f)
             ) { }
             HorizontalSpacer(AppSpacing.sm)
-            StatisticsCard(
+            DiveLogStatisticsCard(
                 modifier = Modifier.weight(1f),
                 onClick = onStatisticsClick
             )

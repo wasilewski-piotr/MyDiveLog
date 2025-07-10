@@ -7,7 +7,7 @@ import org.itsolutions.mydivelog.domain.model.results.Result
 
 interface CertificateRepository {
     suspend fun getDistinctOrganizations(): List<DiveOrganization>
-    suspend fun getAllCertificates(): List<Certificate>
+    suspend fun getAllCertifications(): List<Certificate>
     suspend fun createCertificate(certificate: Certificate): Result<Unit, DataError>
     suspend fun deleteCertificate(certificate: Certificate): Result<Unit, DataError>
 }

@@ -19,8 +19,8 @@ class CertificateRepositoryImpl @Inject constructor(
         return certificateDao.getDistinctOrganizations()
     }
 
-    override suspend fun getAllCertificates(): List<Certificate> {
-        return certificateDao.getAllCertificates().map { it.toDomain() }
+    override suspend fun getAllCertifications(): List<Certificate> {
+        return certificateDao.getAllCertifications().map { it.toDomain() }
     }
 
     override suspend fun createCertificate(certificate: Certificate): Result<Unit, DataError> {
