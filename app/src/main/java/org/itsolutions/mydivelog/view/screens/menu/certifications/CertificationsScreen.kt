@@ -54,7 +54,6 @@ fun CertificationsScreen(
         Row {
             DiveLogNewElementCard(
                 text = R.string.new_certification,
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 modifier = Modifier.weight(1f),
                 onClick = { launcher(NewCertificationActivity.createInstance(context)) }
             )
@@ -62,14 +61,12 @@ fun CertificationsScreen(
                 HorizontalSpacer(AppSpacing.sm)
                 DiveLogButtonCard(
                     text = R.string.see_all_certifications,
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
                     modifier = Modifier.weight(1f),
                     onClick = { launcher(AllCertificationsListActivity.createInstance(context)) }
-                ) { tint, modifier ->
+                ) { modifier ->
                     Icon(
                         painter = painterResource(R.drawable.quick_reference_all),
                         contentDescription = null,
-                        tint = tint,
                         modifier = modifier
                     )
                 }

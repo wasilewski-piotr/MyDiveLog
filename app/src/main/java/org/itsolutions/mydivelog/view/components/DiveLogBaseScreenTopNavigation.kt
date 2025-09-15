@@ -33,9 +33,6 @@ fun DiveLogBaseScreenTopNavigation(
                         style = MaterialTheme.typography.bodyLarge
                     )
                 },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.background
-                ),
                 navigationIcon = {
                     IconButton(
                         content = {

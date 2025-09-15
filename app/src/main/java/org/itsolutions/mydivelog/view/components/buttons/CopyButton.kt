@@ -55,10 +55,6 @@ fun CopyButton(
         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
         shape = RoundedCornerShape(8.dp),
         modifier = modifier.height(32.dp),
-        colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.background,
-            contentColor = MaterialTheme.colorScheme.onBackground
-        )
     ) {
         val icon = painterResource(if (isCopied) R.drawable.check else R.drawable.content_copy)
         val label = if (isCopied) copiedText else initialText

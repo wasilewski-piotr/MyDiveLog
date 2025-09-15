@@ -75,7 +75,6 @@ fun CertificationDataInputScreen(
             DiveLogPrimaryButton(
                 text = "Continue",
                 enabled = certificationNumber.isNotEmpty() && certificationName.isNotEmpty(),
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 onClick = { onConfirm(certificationName, certificationNumber) }
             )
         }

@@ -96,7 +96,6 @@ private fun DiveLogOrganizationCardContent(
             Text(
                 text = stringResource(organization.longName),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
         endIcon?.let { it() }
@@ -111,15 +110,11 @@ fun DiveLogOrganizationCardClickable(
     Card(
         modifier = Modifier.fillMaxWidth(),
         onClick = onClick,
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-        )
     ) {
         DiveLogOrganizationCardContent(organization) {
             Icon(
                 painter = painterResource(R.drawable.chevron_right),
                 contentDescription = "Navigate",
-                tint = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }
@@ -129,9 +124,6 @@ fun DiveLogOrganizationCardClickable(
 fun DiveLogOrganizationCard(organization: DiveOrganization) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-        )
     ) {
         DiveLogOrganizationCardContent(organization)
     }

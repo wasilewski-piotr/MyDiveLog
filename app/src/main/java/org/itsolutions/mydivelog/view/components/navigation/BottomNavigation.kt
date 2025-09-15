@@ -94,7 +94,6 @@ fun DiveLogBottomNavigation(modifier: Modifier = Modifier) {
             Column(modifier = Modifier.fillMaxWidth()) {
                 HorizontalDivider(
                     thickness = 1.dp,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 NavigationBar {
                     Row(

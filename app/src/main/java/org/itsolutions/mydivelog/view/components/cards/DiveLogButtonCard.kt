@@ -24,16 +24,12 @@ fun DiveLogButtonCard(
     @StringRes text: Int,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
-    icon: @Composable (tint: Color, modifier: Modifier) -> Unit,
+    icon: @Composable (modifier: Modifier) -> Unit,
 ) {
     Card(
         onClick = onClick,
         modifier = modifier.height(60.dp),
         shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = containerColor
-        ),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Row(
@@ -43,11 +39,10 @@ fun DiveLogButtonCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            icon(MaterialTheme.colorScheme.onSurfaceVariant, Modifier.size(32.dp))
+            icon(Modifier.size(32.dp))
             Text(
                 text = stringResource(text),
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
             )
         }
     }

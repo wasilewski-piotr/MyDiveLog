@@ -13,19 +13,16 @@ import androidx.compose.ui.graphics.Color
 fun DiveLogNewElementCard(
     @StringRes text: Int,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     onClick: () -> Unit
 ) {
     DiveLogButtonCard(
         modifier = modifier,
         text = text,
         onClick = onClick,
-        containerColor = containerColor
-    ) { tint, modifier ->
+    ) { modifier ->
         Icon(
             imageVector = Icons.Default.Add,
             contentDescription = null,
-            tint = tint,
             modifier = modifier
         )
     }

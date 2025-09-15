@@ -27,7 +27,6 @@ fun MyDivesScreen(
         Row {
             DiveLogNewElementCard(
                 text = R.string.new_dive,
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 modifier = Modifier.weight(1f)
             ) { }
             HorizontalSpacer(AppSpacing.sm)

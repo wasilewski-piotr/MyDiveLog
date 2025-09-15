@@ -46,7 +46,6 @@ fun ColumnScope.DiveLogEmptyListState(
         Text(
             text = title,
             style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
         )
         WeightedSpacer()

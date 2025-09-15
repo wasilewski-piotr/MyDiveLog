@@ -110,9 +110,6 @@ fun DiveLogCertificationCardClickable(
                 onClick = onClick,
                 onLongClick = onLongClick
             ),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-        ),
         shape = RoundedCornerShape(16.dp)
     ) {
         DiveLogCertificationCardContent(
@@ -133,9 +130,6 @@ fun DiveLogCertificationCard(
 ) {
     Card(
         modifier = Modifier.fillMaxWidth(),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerLow
-        ),
         shape = RoundedCornerShape(16.dp)
     ) {
         DiveLogCertificationCardContent(

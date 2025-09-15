@@ -16,12 +16,10 @@ fun DiveLogStatisticsCard(
         modifier = modifier,
         text = R.string.full_dive_report,
         onClick = onClick,
-        containerColor = MaterialTheme.colorScheme.surfaceContainerLowest
-    ) { tint, modifier ->
+    ) { modifier ->
         Icon(
             painter = painterResource(R.drawable.bar_chart),
             contentDescription = null,
-            tint = tint,
             modifier = modifier
         )
     }

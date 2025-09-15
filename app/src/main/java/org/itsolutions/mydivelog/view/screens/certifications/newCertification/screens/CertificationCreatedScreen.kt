@@ -43,7 +43,6 @@ fun SuccessScreen(certification: Certificate, onBack: () -> Unit) {
             Icon(
                 imageVector = Icons.Default.CheckCircle,
                 contentDescription = "Success",
-                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(96.dp)
             )
 
@@ -52,7 +51,6 @@ fun SuccessScreen(certification: Certificate, onBack: () -> Unit) {
             Text(
                 text = "Certification Added Successfully",
                 style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground,
                 textAlign = TextAlign.Center
             )
 
@@ -61,7 +59,6 @@ fun SuccessScreen(certification: Certificate, onBack: () -> Unit) {
             Text(
                 text = "Your certification details have been saved. You can now view them in your profile.",
                 style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
             )
 
@@ -97,7 +94,6 @@ fun SuccessScreen(certification: Certificate, onBack: () -> Unit) {
 
             DiveLogPrimaryButton(
                 text = "Continue",
-                containerColor = MaterialTheme.colorScheme.surfaceContainerHighest,
                 onClick = onBack
             )
         }

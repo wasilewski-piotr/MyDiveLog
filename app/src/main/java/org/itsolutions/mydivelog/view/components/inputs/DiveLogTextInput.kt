@@ -1,6 +1,9 @@
 package org.itsolutions.mydivelog.view.components.inputs
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -15,12 +18,14 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun DiveLogTextInput(
-    inputLabel: String,
-    errorLabel: String,
     value: String,
     onValueChange: (String) -> Unit,
-    modifier: Modifier = Modifier,
+    inputLabel: String? = null,
+    errorLabel: String? = null,
+    readOnly: Boolean = false,
+    trailingIcon: (@Composable () -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    onClick: () -> Unit = { }
 ) {
     var isError by rememberSaveable { mutableStateOf(false) }
 
@@ -28,26 +33,27 @@ fun DiveLogTextInput(
         isError = text.isEmpty()
     }
 
-    Column(modifier = modifier) {
-        OutlinedTextField(
-            value = value,
-            onValueChange = {
-                validate(it)
-                onValueChange(it)
-            },
-            label = { Text(inputLabel) },
-            isError = isError,
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = keyboardOptions,
-            supportingText = {
+    OutlinedTextField(
+        value = value,
+        onValueChange = {
+            validate(it)
+            onValueChange(it)
+        },
+        label = inputLabel?.let {{ Text(it) }},
+        isError = isError,
+        modifier = Modifier.fillMaxSize().clickable { onClick() },
+        keyboardOptions = keyboardOptions,
+        readOnly = readOnly,
+        trailingIcon = trailingIcon,
+        supportingText = {
+            errorLabel?.let {
                 if (isError) {
                     Text(
                         text = errorLabel,
-                        color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.labelSmall
                     )
                 }
             }
-        )
-    }
+        }
+    )
 }

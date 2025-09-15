@@ -22,7 +22,6 @@ fun DiveLogPrimaryButton(
     text: String,
     enabled: Boolean = true,
     modifier: Modifier = Modifier,
-    containerColor: Color = MaterialTheme.colorScheme.surfaceContainerLow,
     onClick: () -> Unit,
 ) {
     Box(Modifier.windowBottomPadding()) {
@@ -33,10 +32,6 @@ fun DiveLogPrimaryButton(
                 .height(40.dp)
                 .fillMaxWidth(),
             shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = containerColor,
-                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-            ),
             elevation = ButtonDefaults.buttonElevation(defaultElevation = 2.dp),
             contentPadding = PaddingValues(0.dp)
         ) {
@@ -47,7 +42,6 @@ fun DiveLogPrimaryButton(
                 Text(
                     text = text,
                     style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }
