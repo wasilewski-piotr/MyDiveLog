@@ -3,7 +3,7 @@ package org.itsolutions.mydivelog.view.screens.certifications.newCertification
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import org.itsolutions.mydivelog.presentation.certifications.NewCertificationViewModel
