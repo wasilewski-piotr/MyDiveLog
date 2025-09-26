@@ -3,7 +3,6 @@ package org.itsolutions.mydivelog.view.screens.certifications.allCertifications
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -17,59 +16,89 @@ import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.domain.model.Certificate
 import org.itsolutions.mydivelog.presentation.certifications.AllCertificationsViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
-import org.itsolutions.mydivelog.view.components.DiveLogBaseScreenTopNavigation
+import org.itsolutions.mydivelog.view.components.DiveLogCircularLoader
 import org.itsolutions.mydivelog.view.components.DiveLogEmptyListState
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
+import org.itsolutions.mydivelog.view.components.navigation.DiveLogTopNavigationBackArrow
 import org.itsolutions.mydivelog.view.components.alerts.DiveLogAlertDialog
 import org.itsolutions.mydivelog.view.components.cards.DiveLogCertificationCardClickable
+import org.itsolutions.mydivelog.view.components.errors.DiveLogFullScreenWarning
 import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AllCertificationsListScreen(
-    reload: () -> Unit,
     onBack: () -> Unit,
+    onReload: () -> Unit,
 ) {
-    val scrollState = rememberScrollState()
     val viewModel: AllCertificationsViewModel = hiltViewModel()
-    val certifications = viewModel.certifications.collectAsState()
+    val uiState = viewModel.uiState.collectAsState().value
 
+    when (uiState) {
+        AllCertificationsViewModel.UiState.Loading -> AllCertificationsLoadingScreen(onBack)
+        is AllCertificationsViewModel.UiState.Error -> DiveLogFullScreenWarning(
+            error = uiState.error,
+            onClose = onBack,
+            onRetry = { viewModel.reloadCertifications() }
+        )
+        is AllCertificationsViewModel.UiState.Ready -> AllCertificationsScreen(
+            certifications = uiState.certifications,
+            onDeleteCertificate = { viewModel.deleteCertificate(it) },
+            onBack = onBack,
+            onReload = onReload
+        )
+    }
+}
+
+@Composable
+private fun AllCertificationsLoadingScreen(onBack: () -> Unit) {
+    AllCertificationsBaseScreen(onBack) {
+        DiveLogCircularLoader()
+    }
+}
+
+@Composable
+private fun AllCertificationsScreen(
+    certifications: List<Certificate>,
+    onDeleteCertificate: (Certificate) -> Unit,
+    onBack: () -> Unit,
+    onReload: () -> Unit
+) {
+
+    val scrollState = rememberScrollState()
     var shouldShowDeleteCertificateDialog by remember { mutableStateOf(false) }
     var selectedCertificate by remember { mutableStateOf<Certificate?>(null) }
 
-    if (shouldShowDeleteCertificateDialog) {
-        DiveLogAlertDialog(
-            title = "Dialog",
-            description = "Description",
-            confirmButtonText = "Confirm",
-            dismissButtonText = "Dismiss",
-            onDismissDialog = { shouldShowDeleteCertificateDialog = false },
-            onConfirm = {
-                selectedCertificate?.let { viewModel.deleteCertificate(it) }
-                reload()
-                shouldShowDeleteCertificateDialog = false
-            }
-        )
-    }
+    AllCertificationsBaseScreen(onBack) {
 
-    DiveLogBaseScreenTopNavigation(
-        screenTitle = stringResource(R.string.see_all_certifications),
-        onBack = onBack
-    ) {
+        if (shouldShowDeleteCertificateDialog) {
+            DiveLogAlertDialog(
+                title = stringResource(R.string.delete_certificate_alert_title),
+                description = stringResource(R.string.delete_certificate_alert_description),
+                confirmButtonText = stringResource(R.string.confirm),
+                dismissButtonText = stringResource(R.string.cancel),
+                onDismissDialog = { shouldShowDeleteCertificateDialog = false },
+                onConfirm = {
+                    selectedCertificate?.let { onDeleteCertificate(it) }
+                    onReload()
+                    shouldShowDeleteCertificateDialog = false
+                }
+            )
+        }
+
         Column(
             modifier = Modifier.verticalScroll(scrollState).takeIf {
-                certifications.value.isNotEmpty()
+                certifications.isNotEmpty()
             } ?: Modifier
         ) {
             DiveLogTitleWithSubtitle(
                 title = stringResource(R.string.certifications_held_title),
                 subtitle = stringResource(R.string.certifications_held_subtitle)
             )
-            if (certifications.value.isEmpty()) {
+            if (certifications.isEmpty()) {
                 DiveLogEmptyListState(stringResource(R.string.empty_certifications_list))
             } else {
                 VerticalSpacer(AppSpacing.sm)
-                certifications.value.sortedBy { it.issueDate }.forEach {
+                certifications.sortedBy { it.issueDate }.forEach {
                     DiveLogCertificationCardClickable(
                         organization = it.organization,
                         certificationName = it.certificateName,
@@ -84,5 +113,18 @@ fun AllCertificationsListScreen(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun AllCertificationsBaseScreen(
+    onBack: () -> Unit,
+    content: @Composable () -> Unit
+) {
+    DiveLogTopNavigationBackArrow(
+        screenTitle = stringResource(R.string.see_all_certifications),
+        onBack = onBack
+    ) {
+        content()
     }
 }

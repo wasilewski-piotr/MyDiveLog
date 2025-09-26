@@ -12,7 +12,7 @@ fun DiveLogStatisticsCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    DiveLogButtonCard(
+    DiveLogSecondaryButton(
         modifier = modifier,
         text = R.string.full_dive_report,
         onClick = onClick,

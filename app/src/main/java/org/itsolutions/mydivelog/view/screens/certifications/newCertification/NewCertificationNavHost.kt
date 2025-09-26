@@ -7,6 +7,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import org.itsolutions.mydivelog.presentation.certifications.NewCertificationUiState
 import org.itsolutions.mydivelog.presentation.certifications.NewCertificationViewModel
+import org.itsolutions.mydivelog.view.components.errors.DiveLogFullScreenError
+import org.itsolutions.mydivelog.view.components.errors.DiveLogFullScreenWarning
 import org.itsolutions.mydivelog.view.screens.certifications.newCertification.screens.CertificationDataInputScreen
 import org.itsolutions.mydivelog.view.screens.certifications.newCertification.screens.ChooseOrganizationScreen
 import org.itsolutions.mydivelog.view.screens.certifications.newCertification.screens.IssuerDataInputScreen
@@ -66,6 +68,13 @@ fun NewCertificationNavHost(
 
                 is NewCertificationUiState.Success -> {
                     SuccessScreen(uiState.certification, onBack)
+                }
+
+                is NewCertificationUiState.Error -> {
+                    DiveLogFullScreenError(
+                        error = uiState.error,
+                        onClose = onBack
+                    )
                 }
 
                 else -> {}

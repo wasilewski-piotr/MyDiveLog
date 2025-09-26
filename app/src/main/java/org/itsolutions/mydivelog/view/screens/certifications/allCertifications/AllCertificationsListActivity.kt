@@ -15,7 +15,7 @@ class AllCertificationsListActivity : MyDiveLogComponentActivity() {
         setDiveLogTheme {
             AllCertificationsListScreen(
                 onBack = ::finish,
-                reload = { setResult(RESULT_OK) }
+                onReload = { setResult(RESULT_OK) }
             )
         }
     }

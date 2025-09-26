@@ -4,6 +4,7 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import org.itsolutions.mydivelog.view.theme.DialogTheme
 
 @Composable
 fun DiveLogAlertDialog(
@@ -14,19 +15,21 @@ fun DiveLogAlertDialog(
     onDismissDialog: () -> Unit,
     onConfirm: () -> Unit,
 ) {
-    AlertDialog(
-        onDismissRequest = onDismissDialog,
-        title = { Text(title) },
-        text = { Text(description) },
-        confirmButton = {
-            TextButton(onClick = onConfirm) {
-                Text(confirmButtonText)
+    DialogTheme {
+        AlertDialog(
+            onDismissRequest = onDismissDialog,
+            title = { Text(title) },
+            text = { Text(description) },
+            confirmButton = {
+                TextButton(onClick = onConfirm) {
+                    Text(confirmButtonText)
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = onDismissDialog) {
+                    Text(dismissButtonText)
+                }
             }
-        },
-        dismissButton = {
-            TextButton(onClick = onDismissDialog) {
-                Text(dismissButtonText)
-            }
-        }
-    )
+        )
+    }
 }

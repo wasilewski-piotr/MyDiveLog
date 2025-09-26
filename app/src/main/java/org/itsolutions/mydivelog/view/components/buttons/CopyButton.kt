@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import org.itsolutions.mydivelog.R
+import org.itsolutions.mydivelog.view.theme.DialogThemeInverted
 
 @Composable
 fun CopyButton(
@@ -35,36 +36,38 @@ fun CopyButton(
     copiedText: String = "Copied",
     resetDelay: Long = 3000L,
 ) {
-    val context = LocalContext.current
-    val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    val clip = ClipData.newPlainText("Copied Text", textToCopy)
-    var isCopied by remember { mutableStateOf(false) }
+    DialogThemeInverted {
+        val context = LocalContext.current
+        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip = ClipData.newPlainText("Copied Text", textToCopy)
+        var isCopied by remember { mutableStateOf(false) }
 
-    LaunchedEffect(isCopied) {
-        if (isCopied) {
-            delay(resetDelay)
-            isCopied = false
+        LaunchedEffect(isCopied) {
+            if (isCopied) {
+                delay(resetDelay)
+                isCopied = false
+            }
         }
-    }
 
-    Button(
-        onClick = {
-            clipboard.setPrimaryClip(clip)
-            isCopied = true
-        },
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
-        shape = RoundedCornerShape(8.dp),
-        modifier = modifier.height(32.dp),
-    ) {
-        val icon = painterResource(if (isCopied) R.drawable.check else R.drawable.content_copy)
-        val label = if (isCopied) copiedText else initialText
+        Button(
+            onClick = {
+                clipboard.setPrimaryClip(clip)
+                isCopied = true
+            },
+            contentPadding = PaddingValues(horizontal = 8.dp, vertical = 4.dp),
+            shape = RoundedCornerShape(8.dp),
+            modifier = modifier.height(32.dp),
+        ) {
+            val icon = painterResource(if (isCopied) R.drawable.check else R.drawable.content_copy)
+            val label = if (isCopied) copiedText else initialText
 
-        Icon(
-            painter = icon,
-            contentDescription = label,
-            modifier = Modifier.size(16.dp)
-        )
-        Spacer(modifier = Modifier.width(4.dp))
-        Text(label, style = MaterialTheme.typography.labelSmall)
+            Icon(
+                painter = icon,
+                contentDescription = label,
+                modifier = Modifier.size(16.dp)
+            )
+            Spacer(modifier = Modifier.width(4.dp))
+            Text(label, style = MaterialTheme.typography.labelSmall)
+        }
     }
 }

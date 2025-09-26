@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.itsolutions.mydivelog.domain.model.Certificate
 import org.itsolutions.mydivelog.domain.model.DiveOrganization
+import org.itsolutions.mydivelog.domain.model.results.DataError
+import org.itsolutions.mydivelog.domain.model.results.onError
 import org.itsolutions.mydivelog.domain.model.results.onSuccess
 import org.itsolutions.mydivelog.domain.repository.CertificateRepository
 import java.time.LocalDate
@@ -62,6 +64,9 @@ class NewCertificationViewModel @Inject constructor(
                 .onSuccess {
                     updateState { NewCertificationUiState.Success(certificate) }
                 }
+                .onError { error ->
+                    updateState { NewCertificationUiState.Error(error) }
+                }
         }
     }
 }
@@ -83,4 +88,5 @@ sealed interface NewCertificationUiState {
     ) : WithOrganizationSelected
 
     data class Success(val certification: Certificate) : NewCertificationUiState
+    data class Error(val error: DataError) : NewCertificationUiState
 }

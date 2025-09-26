@@ -1,6 +1,7 @@
 package org.itsolutions.mydivelog.data.local.repository
 
 import org.itsolutions.mydivelog.data.local.database.dao.CertificateDao
+import org.itsolutions.mydivelog.data.local.database.entity.CertificateEntity
 import org.itsolutions.mydivelog.data.mappers.databaseCall
 import org.itsolutions.mydivelog.data.mappers.toDomain
 import org.itsolutions.mydivelog.data.mappers.toEntity
@@ -24,13 +25,13 @@ class CertificateRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createCertificate(certificate: Certificate): Result<Unit, DataError> {
-        return databaseCall {
+        return databaseCall(certificate::class) {
             certificateDao.createCertificate(certificate.toEntity())
         }
     }
 
     override suspend fun deleteCertificate(certificate: Certificate): Result<Unit, DataError> {
-        return databaseCall {
+        return databaseCall(certificate::class) {
             certificateDao.deleteCertificate(certificate.toEntity())
         }
     }

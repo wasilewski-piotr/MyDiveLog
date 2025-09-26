@@ -33,4 +33,9 @@
     <string name="certification_data_input_subtitle">Provide your certification number and the date it was issued.</string>
     <string name="issuer_data_input_title">Who Issued Your Certification?</string>
     <string name="issuer_data_input_subtitle">Tell us who issued your certificate, including their ID and when it was granted.</string>
+    <string name="error_certificate_already_exists">This organisation already has a certificate registered with the same number. To proceed, please provide a unique certificate number that does not duplicate an existing one.</string>
+    <string name="delete_certificate_alert_title">Delete this certificate?</string>
+    <string name="delete_certificate_alert_description">Deleting this certificate will permanently remove it and all dives associated with it. This action cannot be undone. Are you sure you want to continue?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
 </resources>

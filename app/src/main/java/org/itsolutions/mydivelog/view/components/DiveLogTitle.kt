@@ -15,7 +15,6 @@ fun DiveLogTitleWithSubtitle(
     subtitle: String
 ) {
     Column {
-        VerticalSpacer(AppSpacing.md)
         DiveLogTitle(title)
         DiveLogSubtitle(subtitle)
         VerticalSpacer(AppSpacing.sm)
@@ -24,17 +23,20 @@ fun DiveLogTitleWithSubtitle(
 
 @Composable
 fun DiveLogTitle(title: String) {
-    Text(
-        text = title,
-        style = MaterialTheme.typography.headlineLarge,
-        modifier = Modifier.padding(vertical = AppSpacing.sm)
-    )
+    Column {
+        VerticalSpacer(AppSpacing.md)
+        Text(
+            text = title,
+            style = MaterialTheme.typography.headlineLarge,
+            modifier = Modifier.padding(vertical = AppSpacing.sm)
+        )
+    }
 }
 
 @Composable
 fun DiveLogSubtitle(subtitle: String) {
     Text(
         text = subtitle,
-        modifier = Modifier.padding(vertical = AppSpacing.sm)
+        modifier = Modifier.padding(vertical = AppSpacing.sm),
     )
 }

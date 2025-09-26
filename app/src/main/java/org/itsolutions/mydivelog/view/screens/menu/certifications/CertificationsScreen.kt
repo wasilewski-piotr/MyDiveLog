@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -21,9 +20,9 @@ import org.itsolutions.mydivelog.utils.modifier.windowBottomPadding
 import org.itsolutions.mydivelog.view.components.DiveLogEmptyListState
 import org.itsolutions.mydivelog.view.components.DiveLogSubtitle
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
-import org.itsolutions.mydivelog.view.components.cards.DiveLogButtonCard
 import org.itsolutions.mydivelog.view.components.cards.DiveLogNewElementCard
 import org.itsolutions.mydivelog.view.components.cards.DiveLogOrganizationCardClickable
+import org.itsolutions.mydivelog.view.components.cards.DiveLogSecondaryButton
 import org.itsolutions.mydivelog.view.components.semantics.HorizontalSpacer
 import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 import org.itsolutions.mydivelog.view.screens.certifications.allCertifications.AllCertificationsListActivity
@@ -59,7 +58,7 @@ fun CertificationsScreen(
             )
             if (organizations.value.isNotEmpty()) {
                 HorizontalSpacer(AppSpacing.sm)
-                DiveLogButtonCard(
+                DiveLogSecondaryButton(
                     text = R.string.see_all_certifications,
                     modifier = Modifier.weight(1f),
                     onClick = { launcher(AllCertificationsListActivity.createInstance(context)) }

@@ -17,7 +17,7 @@ interface CertificateDao {
     @Query("SELECT * FROM certifications")
     suspend fun getAllCertifications(): List<CertificateEntity>
 
-    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.ABORT)
     suspend fun createCertificate(certificate: CertificateEntity)
 
     @Delete

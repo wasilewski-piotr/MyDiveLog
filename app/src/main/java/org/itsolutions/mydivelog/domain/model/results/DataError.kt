@@ -10,6 +10,7 @@ sealed interface DataError : Error {
     enum class Local : DataError {
         DISK_FULL,
         ELEMENT_ALREADY_EXISTS,
+        CERTIFICATE_ALREADY_EXISTS,
         UNKNOWN
     }
 }

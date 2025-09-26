@@ -1,5 +1,6 @@
 package org.itsolutions.mydivelog.domain.repository
 
+import org.itsolutions.mydivelog.data.local.database.entity.CertificateEntity
 import org.itsolutions.mydivelog.domain.model.Certificate
 import org.itsolutions.mydivelog.domain.model.DiveOrganization
 import org.itsolutions.mydivelog.domain.model.results.DataError

@@ -15,8 +15,8 @@ import androidx.compose.ui.unit.dp
 import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.domain.model.DiveOrganization
 import org.itsolutions.mydivelog.utils.AppSpacing
-import org.itsolutions.mydivelog.view.components.DiveLogBaseScreenTopNavigation
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
+import org.itsolutions.mydivelog.view.components.navigation.DiveLogTopNavigationBackArrow
 import org.itsolutions.mydivelog.view.components.cards.DiveLogOrganizationLogoCard
 import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 
@@ -25,7 +25,7 @@ fun ChooseOrganizationScreen(
     onBack: () -> Unit,
     onSelected: (DiveOrganization) -> Unit
 ) {
-    DiveLogBaseScreenTopNavigation(
+    DiveLogTopNavigationBackArrow(
         screenTitle = stringResource(R.string.new_certification),
         onBack = onBack,
     ) {

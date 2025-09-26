@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -18,8 +17,8 @@ import androidx.compose.ui.text.input.KeyboardCapitalization
 import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.domain.model.DiveOrganization
 import org.itsolutions.mydivelog.utils.AppSpacing
-import org.itsolutions.mydivelog.view.components.DiveLogBaseScreenTopNavigation
 import org.itsolutions.mydivelog.view.components.DiveLogTitleWithSubtitle
+import org.itsolutions.mydivelog.view.components.navigation.DiveLogTopNavigationBackArrow
 import org.itsolutions.mydivelog.view.components.buttons.DiveLogPrimaryButton
 import org.itsolutions.mydivelog.view.components.cards.DiveLogOrganizationCard
 import org.itsolutions.mydivelog.view.components.inputs.DiveLogTextInput
@@ -32,15 +31,17 @@ fun CertificationDataInputScreen(
     onBack: () -> Unit,
     onConfirm: (certificationName: String, certificationNumber: String) -> Unit,
 ) {
-    DiveLogBaseScreenTopNavigation(
+    DiveLogTopNavigationBackArrow(
         screenTitle = stringResource(R.string.new_certification),
         onBack = onBack
     ) {
         val scrollState = rememberScrollState()
+
         Column(modifier = Modifier
             .fillMaxSize()
             .verticalScroll(scrollState)
-            .imePadding()) {
+            .imePadding()
+        ) {
             var certificationName by rememberSaveable { mutableStateOf("") }
             var certificationNumber by rememberSaveable { mutableStateOf("") }
 
@@ -48,17 +49,15 @@ fun CertificationDataInputScreen(
                 title = stringResource(R.string.certification_data_input_title),
                 subtitle = stringResource(R.string.certification_data_input_subtitle)
             )
-            VerticalSpacer(AppSpacing.md)
             DiveLogOrganizationCard(organization)
-            VerticalSpacer(AppSpacing.md)
+            VerticalSpacer(AppSpacing.sm)
 
             DiveLogTextInput(
                 inputLabel = "Certification Name",
                 errorLabel = "Cannot be empty",
                 value = certificationName,
-                onValueChange = { certificationName = it },
+                onValueChange = { certificationName = it }
             )
-            VerticalSpacer(AppSpacing.xs)
             DiveLogTextInput(
                 inputLabel = "Certification Number",
                 errorLabel = "Cannot be empty",
@@ -66,15 +65,13 @@ fun CertificationDataInputScreen(
                 keyboardOptions = KeyboardOptions(
                     capitalization = KeyboardCapitalization.Characters
                 ),
-                onValueChange = { certificationNumber = it },
+                onValueChange = { certificationNumber = it }
             )
-
             WeightedSpacer()
-            VerticalSpacer(AppSpacing.md)
-
+            VerticalSpacer(AppSpacing.sm)
             DiveLogPrimaryButton(
                 text = "Continue",
-                enabled = certificationNumber.isNotEmpty() && certificationName.isNotEmpty(),
+                enabled = certificationNumber.isNotBlank() && certificationName.isNotBlank(),
                 onClick = { onConfirm(certificationName, certificationNumber) }
             )
         }

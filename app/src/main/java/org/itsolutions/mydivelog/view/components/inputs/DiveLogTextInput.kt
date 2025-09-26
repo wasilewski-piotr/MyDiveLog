@@ -12,9 +12,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusEvent
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlin.coroutines.coroutineContext
 
 @Composable
 fun DiveLogTextInput(
@@ -29,19 +34,24 @@ fun DiveLogTextInput(
 ) {
     var isError by rememberSaveable { mutableStateOf(false) }
 
-    fun validate(text: String) {
-        isError = text.isEmpty()
+    fun validate(text: String?) {
+        isError = text.isNullOrEmpty()
     }
 
     OutlinedTextField(
         value = value,
+        maxLines = 1,
         onValueChange = {
             validate(it)
             onValueChange(it)
         },
         label = inputLabel?.let {{ Text(it) }},
         isError = isError,
-        modifier = Modifier.fillMaxSize().clickable { onClick() },
+        modifier = Modifier
+            .fillMaxSize()
+            .clickable {
+                onClick()
+            },
         keyboardOptions = keyboardOptions,
         readOnly = readOnly,
         trailingIcon = trailingIcon,

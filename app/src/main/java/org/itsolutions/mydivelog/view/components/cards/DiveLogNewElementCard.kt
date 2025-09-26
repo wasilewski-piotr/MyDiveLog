@@ -15,7 +15,7 @@ fun DiveLogNewElementCard(
     modifier: Modifier = Modifier,
     onClick: () -> Unit
 ) {
-    DiveLogButtonCard(
+    DiveLogPrimaryButton(
         modifier = modifier,
         text = text,
         onClick = onClick,
