@@ -1,5 +1,6 @@
 package org.itsolutions.mydivelog.view.screens.certifications.allCertifications
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -14,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import org.itsolutions.mydivelog.R
 import org.itsolutions.mydivelog.domain.model.Certificate
+import org.itsolutions.mydivelog.domain.model.DiveOrganization
 import org.itsolutions.mydivelog.presentation.certifications.AllCertificationsViewModel
 import org.itsolutions.mydivelog.utils.AppSpacing
 import org.itsolutions.mydivelog.view.components.DiveLogCircularLoader
@@ -27,14 +29,19 @@ import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 
 @Composable
 fun AllCertificationsListScreen(
+    organization: DiveOrganization? = null,
     onBack: () -> Unit,
     onReload: () -> Unit,
 ) {
     val viewModel: AllCertificationsViewModel = hiltViewModel()
     val uiState = viewModel.uiState.collectAsState().value
+    val textResources = organization.getTextResourcesByOrganization()
 
     when (uiState) {
-        AllCertificationsViewModel.UiState.Loading -> AllCertificationsLoadingScreen(onBack)
+        AllCertificationsViewModel.UiState.Loading -> AllCertificationsLoadingScreen(
+            resources = textResources,
+            onBack = onBack
+        )
         is AllCertificationsViewModel.UiState.Error -> DiveLogFullScreenWarning(
             error = uiState.error,
             onClose = onBack,
@@ -42,23 +49,27 @@ fun AllCertificationsListScreen(
         )
         is AllCertificationsViewModel.UiState.Ready -> AllCertificationsScreen(
             certifications = uiState.certifications,
+            organization = organization,
             onDeleteCertificate = { viewModel.deleteCertificate(it) },
             onBack = onBack,
-            onReload = onReload
+            onReload = onReload,
+            resources = textResources
         )
     }
 }
 
 @Composable
-private fun AllCertificationsLoadingScreen(onBack: () -> Unit) {
-    AllCertificationsBaseScreen(onBack) {
+private fun AllCertificationsLoadingScreen(resources: CertificationsTextResources, onBack: () -> Unit) {
+    AllCertificationsBaseScreen(resources.screenTitle, onBack) {
         DiveLogCircularLoader()
     }
 }
 
 @Composable
 private fun AllCertificationsScreen(
+    resources: CertificationsTextResources,
     certifications: List<Certificate>,
+    organization: DiveOrganization? = null,
     onDeleteCertificate: (Certificate) -> Unit,
     onBack: () -> Unit,
     onReload: () -> Unit
@@ -68,7 +79,11 @@ private fun AllCertificationsScreen(
     var shouldShowDeleteCertificateDialog by remember { mutableStateOf(false) }
     var selectedCertificate by remember { mutableStateOf<Certificate?>(null) }
 
-    AllCertificationsBaseScreen(onBack) {
+    val certList = organization?.let {
+        certifications.filter { cert -> cert.organization == organization }
+    } ?: certifications
+
+    AllCertificationsBaseScreen(resources.screenTitle, onBack) {
 
         if (shouldShowDeleteCertificateDialog) {
             DiveLogAlertDialog(
@@ -87,18 +102,19 @@ private fun AllCertificationsScreen(
 
         Column(
             modifier = Modifier.verticalScroll(scrollState).takeIf {
-                certifications.isNotEmpty()
+                certList.isNotEmpty()
             } ?: Modifier
         ) {
             DiveLogTitleWithSubtitle(
-                title = stringResource(R.string.certifications_held_title),
-                subtitle = stringResource(R.string.certifications_held_subtitle)
+                title = resources.title,
+                subtitle = resources.description
             )
-            if (certifications.isEmpty()) {
+            if (certList.isEmpty()) {
                 DiveLogEmptyListState(stringResource(R.string.empty_certifications_list))
             } else {
                 VerticalSpacer(AppSpacing.sm)
-                certifications.sortedBy { it.issueDate }.forEach {
+
+                certList.sortedByDescending { it.issueDate }.forEach {
                     DiveLogCertificationCardClickable(
                         organization = it.organization,
                         certificationName = it.certificateName,
@@ -118,13 +134,36 @@ private fun AllCertificationsScreen(
 
 @Composable
 private fun AllCertificationsBaseScreen(
+    title: String,
     onBack: () -> Unit,
     content: @Composable () -> Unit
 ) {
     DiveLogTopNavigationBackArrow(
-        screenTitle = stringResource(R.string.see_all_certifications),
+        screenTitle = title,
         onBack = onBack
     ) {
         content()
+    }
+}
+
+private data class CertificationsTextResources(
+    val title: String,
+    val description: String,
+    val screenTitle: String
+)
+
+@Composable
+private fun DiveOrganization?.getTextResourcesByOrganization(): CertificationsTextResources {
+    return when (this) {
+        null -> CertificationsTextResources(
+            title = stringResource(R.string.certifications_held_title),
+            description = stringResource(R.string.certifications_held_subtitle),
+            screenTitle = stringResource(R.string.see_all_certifications)
+        )
+        else -> CertificationsTextResources(
+            title = stringResource(R.string.certifications_held_by_organization_title, this.name),
+            description = stringResource(R.string.certifications_held_by_organization_subtitle, this.name),
+            screenTitle = stringResource(R.string.see_certifications_by_organization, this.name),
+        )
     }
 }

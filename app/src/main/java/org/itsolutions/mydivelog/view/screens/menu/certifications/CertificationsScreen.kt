@@ -26,6 +26,7 @@ import org.itsolutions.mydivelog.view.components.cards.DiveLogSecondaryButton
 import org.itsolutions.mydivelog.view.components.semantics.HorizontalSpacer
 import org.itsolutions.mydivelog.view.components.semantics.VerticalSpacer
 import org.itsolutions.mydivelog.view.screens.certifications.allCertifications.AllCertificationsListActivity
+import org.itsolutions.mydivelog.view.screens.certifications.allCertifications.AllCertificationsListScreen
 import org.itsolutions.mydivelog.view.screens.certifications.newCertification.NewCertificationActivity
 
 @Composable
@@ -80,7 +81,7 @@ fun CertificationsScreen(
             organizations.value.forEach { organization ->
                 DiveLogOrganizationCardClickable(
                     organization = organization,
-                    onClick = { }
+                    onClick = { launcher(AllCertificationsListActivity.createInstance(context, organization)) }
                 )
                 VerticalSpacer(AppSpacing.xs)
             }

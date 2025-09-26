@@ -10,6 +10,7 @@
     <string name="new_buddy">Create a new dive buddy profile</string>
     <string name="new_certification">New Certification</string>
     <string name="see_all_certifications">View All Certifications</string>
+    <string name="see_certifications_by_organization">View %1$s Certifications</string>
     <string name="my_dives_title">Recent Activities</string>
     <string name="my_dives_subtitle">Explore your most recent logged dives and adventures.</string>
     <string name="statistics_title">Dive Report</string>
@@ -23,7 +24,9 @@
     <string name="PADI">Professional Association of Diving Instructors</string>
     <string name="GUE">Global Underwater Explorers</string>
     <string name="certifications_held_title">Your Diving Certifications</string>
+    <string name="certifications_held_by_organization_title">Your %1$s Certifications</string>
     <string name="certifications_held_subtitle">The list below shows all your diving certifications obtained from various diving organizations.\nThey are sorted by the date of issue, with the most recent displayed first.</string>
+    <string name="certifications_held_by_organization_subtitle">The list below shows your diving certifications obtained in %1$s organization.\nThey are sorted by the date of issue, with the most recent displayed first.</string>
     <string name="empty_certifications_list">We were not able to find any certifications</string>
     <string name="empty_organizations_list">We were not able to find any organizations you are a member of.</string>
     <string name="create_certification">Create Certification</string>
